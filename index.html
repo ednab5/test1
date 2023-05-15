@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Final Exam</title>
+  <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous" />
+  <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
+    integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous" />
+  <style>
+    .panel {
+      min-height: 390px;
+    }
+
+
+table, th, td {
+  border:1px solid black;
+}
+
+  </style>
+
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+    integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
+    crossorigin="anonymous"></script>
+  <script src="//stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+    integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZh3w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+    crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+
+    <h1> TABELA </h1>
+    <table id="podaci">
+      <tr>
+        <th>Id</th>
+        <th>Ime</th>
+        <th>Prezime</th>
+        <th>Novčanik</th>
+      </tr>
+    
+     <!--   <tr>
+          <th>Company</th>
+          <th>Contact</th>
+          <th>Country</th>
+        </tr>
+        <tr>
+          <td>Alfreds Futterkiste</td>
+          <td>Maria Anders</td>
+          <td>Germany</td>
+        </tr>
+        <tr>
+          <td>Centro comercial Moctezuma</td>
+          <td>Francisco Chang</td>
+          <td>Mexico</td> 
+        </tr> -->
+      </table>
+      <br>
+      <br>
+      <label for="datafrom">Choose a transfer:</label>
+      <select name="datafrom" id="datafrom">
+    <option value="sender">sender_id</option>
+    <option value="recipient">recipient_id</option>
+    <option value="amountt">amount</option>
+    <option value="createdat">created_at</option>
+  </select>
+     
+    <script>
+    function investitori(){
+            $.ajax({
+              url: 'api/investors',
+              type: 'get',
+              success: function(data) {
+                var tabela= "";
+                console.log(data[0].first_name);
+                console.log(data.length);
+
+            for (let i = 0; i < array.length; i++) {
+              const element = array[i];
+              
+                tabela += `<tr> 
+
+                <th>`+ data[i].id + `</th>
+              <th>`+ data[i].first_name + `</th>
+              <th>`+ data[i].last_name + `</th>
+              <th>`+ data[i].wallet + `</th>
+              </tr>`;
+              }
+              $("#podaci").append(tabela);
+            }
+            });
+          }
+          
+
+          function investitor(){
+            $.ajax({
+              url: 'api/investors/5',
+              type: 'get',
+              success: function(data) {
+                console.log(data);
+                 
+              }
+            });
+          }
+
+
+          function lista() {
+      $.ajax({
+        url: "api/transferi",
+        type: "get",
+        success: function (data) {
+          console.log(data);
+         var spisak = "";
+
+         for (let i = 0; i < data.length; i++) {
+            spisak += `<tr>
+          
+              <th>`+ data[i].amount + `</th>
+             
+              </tr> `;           
+                      
+            
+          }
+        },
+      });
+    }
+          
+    function transfer(){
+            $.ajax({
+              url: 'api/transferi/5',
+              type: 'get',
+              success: function(data) {
+                console.log(data);
+                 
+              }
+            });
+          }
+
+
+     investitori();
+     investitor();
+     lista();
+     transfer();
+
+    </script>
+    
+    
+</body>
+</html>
